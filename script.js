@@ -1,45 +1,101 @@
 const questions = [        //will make a separate javascript file for this one this is just for the development time...
     {
-        question:"who are you ?",
+        question:"when : where :: time : ______?",
         answer:[
-            {text:"i'm batman !",result:"false"},
-            {text:"i'm iron man !",result:"false"},
-            {text:"i'm steve rogers !" ,result:"true"},
-            {text:"i'm groot !",result:"false"}
+            {text:"reason",result:"false"},
+            {text:"process",result:"false"},
+            {text:"place" ,result:"true"},
+            {text:"length",result:"false"}
         ]
     },
     {
-        question:"one number ?",
+        question:"A is husband of B and C is mother of D and B. what is A to C?",
         answer:[
-            {text:"a !",result:"false"},
-            {text:"d !",result:"false"},
-            {text:"1" ,result:"true"},
-            {text:"j",result:"false"}
+            {text:"mother",result:"false"},
+            {text:"sister",result:"false"},
+            {text:"aunt" ,result:"false"},
+            {text:"mother-in-law",result:"true"}
         ]
     },
     {
-        question:"why do i live ?",
+        question:"NUMBER : UNBMRE :: GHOST : ______?",
         answer:[
-            {text:"to eat",result:"false"},
-            {text:"to sleep",result:"false"},
-            {text:"to relax" ,result:"false"},
-            {text:"all of these",result:"true"}
+            {text:"HOGST",result:"false"},
+            {text:"HOGTS",result:"false"},
+            {text:"HGOST" ,result:"false"},
+            {text:"HGOTS",result:"true"}
         ]
     },
+    {
+        question:"09 : 25 :: 49 : ______?",
+        answer:[
+            {text:"63",result:"false"},
+            {text:"36",result:"false"},
+            {text:"64" ,result:"false"},
+            {text:"81",result:"true"}
+        ]
+    },
+    {
+        question:"The missing number on the Tringle ?",
+        answer:[
+            {text:"25",result:"false"},
+            {text:"26",result:"false"},
+            {text:"30" ,result:"true"},
+            {text:"36",result:"false"}
+        ]
+    },
+    {
+        question:"if ACE ia 9 and BES is 26 then ice is _____?",
+        answer:[
+            {text:"62",result:"false"},
+            {text:"26",result:"false"},
+            {text:"22" ,result:"false"},
+            {text:"17",result:"true"}
+        ]
+    },    {
+        question:"RAM goes 6km towards east then 8km towards north .now ram is how far away from his initial position ?",
+        answer:[
+            {text:"2km",result:"false"},
+            {text:"14 km",result:"false"},
+            {text:"10km" ,result:"true"},
+            {text:"24km",result:"false"}
+        ]
+    },    {
+        question:"JLN : SQU :: PRT:_____ ?",
+        answer:[
+            {text:"UYW",result:"false"},
+            {text:"UTV",result:"false"},
+            {text:"YMU" ,result:"true"},
+            {text:"VUT",result:"false"}
+        ]
+    },
+    // {
+    //     question:"?",
+    //     answer:[
+    //         {text:"",result:""},
+    //         {text:"",result:""},
+    //         {text:"" ,result:""},
+    //         {text:"",result:""}
+    //     ]
+    // },
 ]
 
 const questionDetails = document.getElementById("questions");
 const options = document.getElementById("answerButton");
 const submit = document.getElementById("nextBtn");
+const notice = document.getElementById("Notice");
 
 
 // console.log(questionDetails);
 // console.log(options); 
 // console.log(submit);   i was testing !!
+console.log(notice);
 
 
 let currentQuestionIndexNumber = 0; // for keeping  a record of index or number of questions 
 let score = 0; // im mean without it whats the fun
+let correctAnswerCount = 0;
+let incorrectAnswerCount = 0;
 
 
 function startQuiz(){
@@ -87,11 +143,14 @@ function response(e){
     if(correctAns){
         selectedButton.classList.add("correct");
         console.log("correct");
-        score++;
+        score = score + 3;
+        correctAnswerCount++;
         console.log(score);
     }else{
         selectedButton.classList.add("incorrect")
-        console.log("incorrect");
+        console.log("incorrect")
+        score = score - 2;
+        incorrectAnswerCount++;
     }
 
 
@@ -108,9 +167,10 @@ function response(e){
 
 function showScore(){
     resetState();
-    questionDetails.innerHTML = `your score is ${score} out of ${questions.length}`;
+    questionDetails.innerHTML = `your score is ${score} out of ${questions.length * 3} the number of correct answers were ${correctAnswerCount} and incorrect answers were ${incorrectAnswerCount}`;
     submit.innerHTML = "test again";
     submit.style.display = "block";
+    notice.style.display = "none";
 }
 
 submit.addEventListener("click",() =>{
